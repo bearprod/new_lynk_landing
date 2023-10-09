@@ -15,11 +15,18 @@ const ReactToPost = ({ imgURL, post_id }) => {
         <meta property="og:url" content={`https://lynkapp.co/react_to/${post_id}`} />
       </Head>
 
-      <div className="flex flex-col h-screen justify-center items-center" style={{ backgroundColor: '#000321' }}>
+      <div className="flex flex-col h-screen justify-center items-center bg-[#000321]">
         <p className="text-white mb-4">Post ID: {post_id}</p>
         {imgURL ? (
-          <div className="rounded-full overflow-hidden" style={{ width: '50%', paddingBottom: '50%' }}>
-            <img src={imgURL} alt={`Shared Post ${post_id}`} className="absolute object-cover w-full h-full" />
+          <div className="relative w-1/2 max-w-[300px] h-0 pb-1/2 overflow-hidden">
+            <img 
+                src={imgURL} 
+                alt={`Shared Post ${post_id}`} 
+                className="absolute top-0 left-0 w-full h-full object-cover rounded-full mask mask-center mask-repeat mask-image-radial-at-center"
+                style={{ 
+                  maskImage: 'radial-gradient(circle, black 45%, transparent 50%)' 
+                }}
+            />
           </div>
         ) : (
           <p className="text-white">Loading...</p>
@@ -50,8 +57,6 @@ export async function getServerSideProps(context) {
 }
 
 export default ReactToPost;
-
-
 
 
 
