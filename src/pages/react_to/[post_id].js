@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import { ref, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../lib/firebase'; 
 
 export default function ReactToPost() {
   const router = useRouter();
@@ -11,7 +12,6 @@ export default function ReactToPost() {
   useEffect(() => {
     if (post_id) {
       // Create a reference to the specific image in Firebase Cloud Storage
-      const storage = getStorage();
       const pathReference = ref(storage, `${post_id}.jpeg`); 
 
       getDownloadURL(pathReference)
