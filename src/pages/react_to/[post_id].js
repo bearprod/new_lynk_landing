@@ -18,7 +18,9 @@ const ReactToPost = ({ imgURL, post_id }) => {
       <div className="flex flex-col h-screen justify-center items-center" style={{ backgroundColor: '#000321' }}>
         <p className="text-white mb-4">Post ID: {post_id}</p>
         {imgURL ? (
-          <img src={imgURL} alt={`Shared Post ${post_id}`} style={{ maxWidth: '50%', maxHeight: '80vh' }} />
+          <div className="rounded-full overflow-hidden" style={{ width: '50%', paddingBottom: '50%' }}>
+            <img src={imgURL} alt={`Shared Post ${post_id}`} className="absolute object-cover w-full h-full" />
+          </div>
         ) : (
           <p className="text-white">Loading...</p>
         )}
@@ -48,6 +50,7 @@ export async function getServerSideProps(context) {
 }
 
 export default ReactToPost;
+
 
 
 
