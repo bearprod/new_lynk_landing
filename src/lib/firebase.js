@@ -1,7 +1,6 @@
-import firebase from 'firebase/app';
-import 'firebase/storage';  
+import { initializeApp, getApps } from 'firebase/app';
+import { getStorage } from 'firebase/storage';
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyA1boKPLZDdmhYL4ljJq_DBSfkDFHhAT5M",
     authDomain: "lynk-aef8f.firebaseapp.com",
@@ -12,13 +11,14 @@ const firebaseConfig = {
     measurementId: "G-FT7P6K21HF"
 };
 
-// Initialize Firebase
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
+// Make sure to not initialize more than once
+let app;
+if (!getApps().length) {
+  app = initializeApp(firebaseConfig);
 } else {
-  firebase.app(); // if already initialized, use that one
+  app = getApps()[0]; // if already initialized, use that one
 }
 
-const storage = firebase.storage();
+const storage = getStorage(app);
 
 export { storage };
