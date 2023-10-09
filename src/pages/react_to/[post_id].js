@@ -1,37 +1,13 @@
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../lib/firebase'; 
-import Head from 'next/head';  // <-- Importing the Head component
+import Head from 'next/head';
 
-export default function ReactToPost() {
-  const router = useRouter();
-  const { post_id } = router.query;
-
-  const [imgURL, setImgURL] = useState(null);
-
-  useEffect(() => {
-    if (post_id) {
-      // Create a reference to the specific image in Firebase Cloud Storage
-      const pathReference = ref(storage, `${post_id}.jpeg`); 
-
-      getDownloadURL(pathReference)
-        .then(url => {
-          setImgURL(url);
-        })
-        .catch(err => {
-          console.error('Error fetching image:', err);
-        });
-    }
-  }, [post_id]);
-
+const ReactToPost = ({ imgURL, post_id }) => {
   return (
     <>
       <Head>
         <title>React to my post</title>
         <meta name="description" content="View and react to the shared post." />
-
-        {/* Open Graph Protocol tags */}
         <meta property="og:title" content="React to my post" />
         <meta property="og:description" content="View and react to the shared post." />
         <meta property="og:type" content="website" />
@@ -57,6 +33,29 @@ export default function ReactToPost() {
     </>
   );
 }
+
+export async function getServerSideProps(context) {
+  const post_id = context.params.post_id;
+  const pathReference = ref(storage, `${post_id}.jpeg`);
+
+  let imgURL = null;
+  
+  try {
+    imgURL = await getDownloadURL(pathReference);
+  } catch (err) {
+    console.error('Error fetching image:', err);
+  }
+
+  return {
+    props: {
+      post_id,
+      imgURL
+    }
+  };
+}
+
+export default ReactToPost;
+
 
 
 
