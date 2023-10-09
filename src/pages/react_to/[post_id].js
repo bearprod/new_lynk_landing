@@ -15,16 +15,10 @@ const ReactToPost = ({ imgURL, post_id }) => {
         <meta property="og:url" content={`https://lynkapp.co/react_to/${post_id}`} />
       </Head>
 
-      <div className="flex flex-col h-screen justify-center items-center bg-[#000321]">
+      <div className="flex flex-col h-screen justify-center items-center" style={{ backgroundColor: '#000321' }}>
         <p className="text-white mb-4">Post ID: {post_id}</p>
         {imgURL ? (
-          <div className="relative w-1/2 max-w-[300px] h-0 pb-1/2 overflow-hidden">
-            <img 
-                src={imgURL} 
-                alt={`Shared Post ${post_id}`} 
-                className="absolute top-0 left-0 w-full h-full object-cover rounded-full mask mask-center mask-repeat mask-image-radial-at-center"
-            />
-          </div>
+          <img src={imgURL} alt={`Shared Post ${post_id}`} style={{ maxWidth: '50%', maxHeight: '80vh' }} />
         ) : (
           <p className="text-white">Loading...</p>
         )}
