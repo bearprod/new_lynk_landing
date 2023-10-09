@@ -23,9 +23,6 @@ const ReactToPost = ({ imgURL, post_id }) => {
                 src={imgURL} 
                 alt={`Shared Post ${post_id}`} 
                 className="absolute top-0 left-0 w-full h-full object-cover rounded-full mask mask-center mask-repeat mask-image-radial-at-center"
-                style={{ 
-                  maskImage: 'radial-gradient(circle, black 45%, transparent 50%)' 
-                }}
             />
           </div>
         ) : (
