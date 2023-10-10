@@ -29,7 +29,7 @@ const ReactToPost = ({ imgURL, post_id }) => {
 
 export async function getServerSideProps(context) {
   const post_id = context.params.post_id;
-  const pathReference = ref(storage, `${post_id}.jpeg`);
+  const pathReference = ref(storage, `share_cards/${post_id}.jpeg`);
 
   let imgURL = null;
   
